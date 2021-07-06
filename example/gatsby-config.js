@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: '@rodriguesmyron/gatsby-theme-podcast',
       options: {
-        rssUrl: 'https://api.substack.com/feed/podcast/12150.rss',
+        rssUrl: 'https://anchor.fm/s/62992278/podcast/rss',
         disqusShortName: '',
         spotifyUrl: 'https://open.spotify.com/show/3eVt1HT08IzIm60b9QwqTg',
         googlePodcastsUrl: '',
