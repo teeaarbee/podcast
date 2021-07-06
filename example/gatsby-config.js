@@ -17,7 +17,7 @@ module.exports = {
         googlePodcastsUrl: '',
         applePodcastsUrl: 'https://podcasts.apple.com/us/podcast/closing-the-circle/id1569773276',
         twitterID: 'https://twitter.com/itsjustmyron',
-        instagramID: 'https://instagram.com/itsjustmyron',
+        instagramID: 'https://instagram.com/teeaarbee',
         facebookID: 'https://facebook.com/itsjustmyron',
         logoUrl: 'https://www.maitri.pub',
       },
