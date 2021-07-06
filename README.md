@@ -18,7 +18,7 @@ This theme is a port of the [gatsby-theme-simplecast](https://gatsby-theme-simpl
        {
          resolve: '@rodriguesmyron/gatsby-theme-podcast',
          options: {
-           rssUrl: 'PODCAST_RSS_URL',
+           rssUrl: 'https://anchor.fm/s/62992278/podcast/rss',
            disqusShortName: 'DISQUS_SHORTNAME',
            spotifyUrl: 'SPOTIFY_PODCAST_URL',
            googlePodcastsUrl: 'GOOGLE_PODCAST_URL',
