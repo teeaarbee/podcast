@@ -10,18 +10,17 @@
   \_/ \_| \_\____/  \_|  \___/ \__,_|\___\__,_|___/\__|
                                                        
                                                        
-
  -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRB's Weekly Podcast | Weekly Thoughts</title>
+    <title>TRB podcast</title>
     <meta name="description"
-        content="Weekly Thoughts by TRB (teeaarbee) A weekly podcast where TRB talks on a new topic every week">
+        content="Weekly Thoughts by TRB (teeaarbee) A weekly podcast where TRB talks on a new topic every week ">
 
     <meta name="keywords"
-        content="trb's weekly podcast, trb podcast, podcast by trb, podcast, weekly podcast by trb, thoughts by trb, weekly thoughts trb, TRB, TEEAARBEE, tearbear, teerbee, teearrbee" >
+        content="TRB, TEEAARBEE, tearbear, teerbee, teearrbee, trb podcast, podcast by trb, podcast, weekly podcast by trb, thoughts by trb, weekly htoughts trb">
     <meta name="robots" content="index, follow">
     <meta name="copyright" content="TRB">
     <meta name="language" content="EN">
@@ -58,46 +57,38 @@
         color: #85e0d8;
         text-decoration: none;
     }
-    .scc {
-  max-width: 30em;
-  display: block;
-  border: 1px solid #000;
-  padding: 10px;
-  font-family: Sans-serif;
-}
-.scc audio { 
-  width: 100%; display: block; 
-}
-.scc div {
-  display: flex;
-  padding: .5em 0;
-  gap: 5px;
-}
-.scc label { flex: 1; }
-.scc input[type="range"] { flex: 5; }
-.scc span {
-  flex: 1;
-  text-align: center;
-}
+
+    .speedcontrolcontainer {
+        max-width: 30em;
+        display: block;
+        padding: 10px;
+        font-family: Sans-serif;
+    }
+
+    .speedcontrolcontainer audio {
+        width: 100%;
+        display: block;
+    }
+
+    .speedcontrolcontainer div {
+        display: flex;
+        padding: .5em 0;
+        gap: 5px;
+    }
+
+    .speedcontrolcontainer label {
+        flex: 1
+    }
+
+    .speedcontrolcontainer input[type="range"] {
+        flex: 5
+    }
+
+    .speedcontrolcontainer span {
+        flex: 1;
+        text-align: center;
+    }
 </style>
-<script>
-    const audio = document.querySelector('.scc  audio');
-const playbackrate = document.querySelector('.scc input');
-const display = document.querySelector('.scc span');
-const displayvalue = val => {
-  return parseInt(val * 100, 10) + '%'
-}
-if (window.localStorage.pbspeed) {
-  audio.playbackRate = window.localStorage.pbspeed;
-  playbackrate.value = window.localStorage.pbspeed;
-}
-display.innerText = displayvalue(audio.playbackRate);
-playbackrate.addEventListener('change', e => {
-  audio.playbackRate = playbackrate.value;
-  display.innerText = displayvalue(playbackrate.value);
-  window.localStorage.pbspeed = playbackrate.value;
-});
-</script>
 <!--testing-->
 
 <body class="">
@@ -215,35 +206,53 @@ playbackrate.addEventListener('change', e => {
 
                 podData.items.forEach(eachPodcast => {
                     // console.log(eachPodcast);
+
                     eachPocastData += ` <div class="card my-3" style="border-radius: 15px">
-                    <div class="card-body speedcontrolcontainer">
-                        <h4 class="card-title eachPodcastTitle ">${eachPodcast.title}</h4>
-                        <p class="eachPodcastPubDate card-text ">Published on: ${eachPodcast.pubDate}</p>
-                        <audio class="card-text eachPodcastLink speedcontrolcontainer my-3" controls>
-                            Your browser does not support the audio element.
-                            <source src="${eachPodcast.enclosure.link}" type="audio/mp4">
-                        </audio>
-                        <div>
+                        <div class="card-body">
+                            <h4 class="card-title eachPodcastTitle ">${eachPodcast.title}</h4>
+                            <p class="eachPodcastPubDate card-text ">Published on: ${eachPodcast.pubDate}</p>
+                            <audio class=" card-text eachPodcastLink my-3" controls>
+                                Your browser does not support the audio element.
+                                <source src="${eachPodcast.enclosure.link}" type="audio/mp4">
+                            </audio>
+                            <div class='speedcontrolcontainer'>
+                            <div>
                             <label for="pbrate">Speed:</label>
                             <input type="range" id="pbrate" min=.5 max=3 value=1 step=.1>
                             <span></span>
+                            </div>
+                            </div>
+                            <p class="eachPodcastDescription">${eachPodcast.description}</p>
                         </div>
-                        <p class="eachPodcastDescription">${eachPodcast.description}</p>
-                    </div>
-                    </div>`                   
+                        </div>`
+
                 });
             }
 
             getAllPodcastDate();
 
-            // console.log('eachPocastData: ');
-            // console.log(eachPocastData);
-
             document.querySelector('.podcastContainer').innerHTML = eachPocastData;
-
+            const audio = document.querySelector('audio');
+            const playbackrate = document.querySelector('.speedcontrolcontainer input');
+            const display = document.querySelector('.speedcontrolcontainer span');
+            const displayvalue = val => {
+                return parseInt(val * 100, 10) + '%'
+            }
+                if (window.localStorage.pbspeed) {
+                    audio.playbackRate = window.localStorage.pbspeed;
+                    playbackrate.value = window.localStorage.pbspeed;
+                }
+                display.innerText = displayvalue(audio.playbackRate);
+            playbackrate.addEventListener('change', e => {
+                audio.playbackRate = playbackrate.value;
+                display.innerText = displayvalue(playbackrate.value);
+                window.localStorage.pbspeed = playbackrate.value;
+            });
         }).catch(err => {
             console.log('error is: ', err);
         })
+
+
     </script>
 </body>
 
