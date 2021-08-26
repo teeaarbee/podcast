@@ -20,7 +20,7 @@
         content="Weekly Thoughts by TRB (teeaarbee) A weekly podcast where TRB talks on a new topic every week ">
 
     <meta name="keywords"
-        content="TRB, TEEAARBEE, tearbear, teerbee, teearrbee, trb podcast, podcast by trb, podcast, weekly podcast by trb, thoughts by trb, weekly htoughts trb">
+        content="TRB, TEEAARBEE, tearbear, teerbee, teearrbee, trb podcast, podcast by trb, podcast, weekly podcast by trb, thoughts by trb, weekly thoughts trb">
     <meta name="robots" content="index, follow">
     <meta name="copyright" content="TRB">
     <meta name="language" content="EN">
@@ -211,11 +211,12 @@
                         <div class="card-body">
                             <h4 class="card-title eachPodcastTitle ">${eachPodcast.title}</h4>
                             <p class="eachPodcastPubDate card-text ">Published on: ${eachPodcast.pubDate}</p>
+                            <div class='speedcontrolcontainer'>
                             <audio class=" card-text eachPodcastLink my-3" controls>
                                 Your browser does not support the audio element.
                                 <source src="${eachPodcast.enclosure.link}" type="audio/mp4">
                             </audio>
-                            <div class='speedcontrolcontainer'>
+                          
                             <div>
                             <label for="pbrate">Speed:</label>
                             <input type="range" id="pbrate" min=.5 max=3 value=1 step=.1>
@@ -230,24 +231,32 @@
             }
 
             getAllPodcastDate();
-
             document.querySelector('.podcastContainer').innerHTML = eachPocastData;
-            const audio = document.querySelector('audio');
-            const playbackrate = document.querySelector('.speedcontrolcontainer input');
-            const display = document.querySelector('.speedcontrolcontainer span');
-            const displayvalue = val => {
-                return parseInt(val * 100, 10) + '%'
-            }
+
+            let all = document.querySelectorAll('.card-body');
+            for (let i = 0; i < all.length; i++) {
+                const audio = document.querySelectorAll('audio')[i];
+                const playbackrate = document.querySelectorAll('.speedcontrolcontainer input')[i];
+                const display = document.querySelectorAll('.speedcontrolcontainer span')[i];
+                const displayvalue = val => {
+                    return parseInt(val * 100, 10) + '%'
+                }
                 if (window.localStorage.pbspeed) {
                     audio.playbackRate = window.localStorage.pbspeed;
                     playbackrate.value = window.localStorage.pbspeed;
                 }
                 display.innerText = displayvalue(audio.playbackRate);
-            playbackrate.addEventListener('change', e => {
-                audio.playbackRate = playbackrate.value;
-                display.innerText = displayvalue(playbackrate.value);
-                window.localStorage.pbspeed = playbackrate.value;
-            });
+                playbackrate.addEventListener('change', e => {
+                    audio.playbackRate = playbackrate.value;
+                    display.innerText = displayvalue(playbackrate.value);
+                    window.localStorage.pbspeed = playbackrate.value;
+                });
+            }
+
+
+
+
+
         }).catch(err => {
             console.log('error is: ', err);
         })
